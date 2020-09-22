@@ -1,6 +1,6 @@
 {
   "name": "check-update-package",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "Minimalistic update notifications for command line interfaces",
   "main": "./index.js",
   "scripts": {
