@@ -8,14 +8,12 @@
     "lint": "zeit-eslint --ext .jsx,.js .",
     "lint-staged": "git diff --diff-filter=ACMRT --cached --name-only '*.js' '*.jsx' | xargs zeit-eslint"
   },
-  "repository": "zeit/update-check",
   "keywords": [
     "update",
     "notifications",
     "checker",
     "notifier"
   ],
-  "author": "leo",
   "license": "MIT",
   "devDependencies": {
     "@zeit/eslint-config-node": "0.3.0",
