@@ -110,8 +110,8 @@ const loadPackage = ({url, timeout}, authInfo) => new Promise((resolve, reject) 
 	}).on('error', reject).on('timeout', () => reject(new Error('Request timeout')));
 });
 
-const getMostRecent = async ({full, scope}, distTag, timeout) => {
-	const regURL = registryUrl(scope);
+const getMostRecent = async ({full, scope, registry}, distTag, timeout) => {
+	const regURL = registry || registryUrl(scope);
 	const url = new URL(full, regURL);
 
 	let spec = null;
@@ -174,7 +174,7 @@ module.exports = async (pkg, config) => {
 
 	const details = getDetails(pkg.name);
 	const time = Date.now();
-	const {distTag, interval, timeout} = Object.assign({}, defaultConfig, config);
+	const {distTag, interval, timeout, registry} = Object.assign({}, defaultConfig, config);
 	const file = await getFile(details, distTag);
 
 	let latest = null;
@@ -183,7 +183,7 @@ module.exports = async (pkg, config) => {
 	({shouldCheck, latest} = await evaluateCache(file, time, interval));
 
 	if (shouldCheck) {
-		latest = await getMostRecent(details, distTag, timeout);
+		latest = await getMostRecent(Object.assign({registry}, details), distTag, timeout);
 
 		// If we pulled an update, we need to update the cache
 		await updateCache(file, latest, time);

@@ -7,6 +7,9 @@ export interface Config {
 
 	/** Allows to set timeout for the request */
 	timeout?: number;
+
+	/** Allows to override the registry url */
+	registry?: string;
 }
 
 export interface Result {
